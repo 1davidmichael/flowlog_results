@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """FlowLog Upload
 Usage:
   flowlog_upload.py --file=<file> --s3url=<s3_url>
