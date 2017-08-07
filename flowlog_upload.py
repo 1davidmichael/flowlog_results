@@ -15,45 +15,53 @@ import tempfile
 from docopt import docopt
 from moto import mock_s3
 
+class flowlog_results(object):
 
-def extract_s3_info(s3_url):
-    # This regex is not complete and could accept incorrect values
-    regexp = re.compile(r's3:\/\/(.*)\/(.*)')
-    match = regexp.match(s3_url)
-    bucket = match.group(1)
-    key = match.group(2)
-    return(bucket, key)
+    def __init__(self, flowlog_file, s3_url):
+        self.flowlog_file = flowlog_file
+        self.s3_url = s3_url
 
-
-def upload_to_s3(bucket, key, ip_data):
-    # Upload file to s3
-    s3 = boto3.client('s3')
-    s3.put_object(Bucket=bucket, Key=key, Body=json.dumps(ip_data))
-
-    return()
+    def extract_s3_info(self):
+        # This regex is not complete and could accept incorrect values
+        regexp = re.compile(r's3:\/\/(.*)\/(.*)')
+        match = regexp.match(self.s3_url)
+        self.bucket = match.group(1)
+        self.key = match.group(2)
+        return(self.bucket, self.key)
 
 
-def count_rejected_ips(flow_log):
-    # Create empty dict
-    count = {}
+    def upload_to_s3(self):
+        # Upload file to s3
+        s3 = boto3.client('s3')
+        try:
+            s3.put_object(Bucket=self.bucket, Key=self.key, Body=json.dumps(self.count))
+            return(True)
+        except:
+            print('Upload to S3 failed!')
 
-    # Iterate over log entries
-    with open(flow_log) as f:
-        log_entries = f.readlines()
 
-    for log_entry in log_entries:
-        # Filter out non-REJECT entries
-        if "REJECT" in log_entry:
-            fields = log_entry.split()
-            source_ip = fields[3]
+    def count_rejected_ips(self):
+        # Create empty dict
+        count = {}
 
-            # Add IP address if it isn't present, else increment by 1
-            if source_ip not in count:
-                count[source_ip] = 1
-            else:
-                count[source_ip] += 1
+        # Iterate over log entries
+        with open(self.flowlog_file) as f:
+            log_entries = f.readlines()
 
-    return(count)
+        for log_entry in log_entries:
+            # Filter out non-REJECT entries
+            if "REJECT" in log_entry:
+                fields = log_entry.split()
+                source_ip = fields[3]
+
+                # Add IP address if it isn't present, else increment by 1
+                if source_ip not in count:
+                    count[source_ip] = 1
+                else:
+                    count[source_ip] += 1
+
+        self.count = count
+        return(self.count)
 
 
 def test_extract_s3_info():
@@ -76,7 +84,7 @@ def test_count_rejected_ips():
 
 
 @mock_s3
-def test_upload_to_s3():
+def test_uploae_to_s3():
     bucket = 'test'
     key = 'test'
     ip_data = {
@@ -97,8 +105,7 @@ if __name__ == '__main__':
     flowlog_file = arguments['--file']
     s3_url = arguments['--s3url']
 
-    rejected_entries = count_rejected_ips(flowlog_file)
-    print(rejected_entries)
-
-    bucket, key = extract_s3_info(s3_url)
-    upload_to_s3(bucket, key, rejected_entries)
+    upload =  flowlog_results(flowlog_file, s3_url)
+    print(upload.extract_s3_info())
+    print(upload.count_rejected_ips())
+    print(upload.upload_to_s3())
