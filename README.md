@@ -3,6 +3,8 @@ Flowlog Upload
 
 This is a simple script to upload an example flowlog to a precreated S3 bucket.
 
+[![CircleCI](https://circleci.com/gh/1davidmichael/flowlog_upload/tree/master.svg?style=svg)](https://circleci.com/gh/1davidmichael/flowlog_upload/tree/master)
+
 Requirements
 ------------
 
@@ -27,4 +29,9 @@ make reqs
 Test
 ```
 make test
+```
+
+Run
+```
+flowlog_results.py --file=flowlog.log--s3url=s3://dm-testbucket/results.json
 ```

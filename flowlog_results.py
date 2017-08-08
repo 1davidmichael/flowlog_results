@@ -107,6 +107,10 @@ if __name__ == '__main__':
     s3_url = arguments['--s3url']
 
     upload =  flowlog_results(flowlog_file, s3_url)
-    print(upload.extract_s3_info())
-    print(upload.count_rejected_ips())
-    print(upload.upload_to_s3())
+
+    upload.extract_s3_info()
+    upload.count_rejected_ips()
+    if upload.upload_to_s3():
+        print("S3 PUT Successful!")
+    print(upload.s3_url)
+
