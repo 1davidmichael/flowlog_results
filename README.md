@@ -33,7 +33,7 @@ make test
 
 Run
 ```
-flowlog_results.py --file=flowlog.log--s3url=s3://dm-testbucket/results.json
+flowlog_results.py --file=flowlog.log --s3url=s3://dm-testbucket/results.json
 ```
 
 TODO
