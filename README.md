@@ -21,5 +21,10 @@ make venv
 
 Install dependencies
 ```
-make deps
+make reqs
+```
+
+Test
+```
+make test
 ```

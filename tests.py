@@ -35,7 +35,6 @@ class TestFlowlogUploadMethods(unittest.TestCase):
 
         upload.upload_to_s3()
         body = conn.Object(bucket, key).get()['Body'].read().decode("utf-8")
-        print(body, count)
         assert body == json.dumps(count)
 
 
