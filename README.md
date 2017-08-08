@@ -35,3 +35,10 @@ Run
 ```
 flowlog_results.py --file=flowlog.log--s3url=s3://dm-testbucket/results.json
 ```
+
+TODO
+----
+
+* Add error handling
+* [Verify s3 bucket and key](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+* Pre-create S3 bucket if IAM permissions allow and does not exist
