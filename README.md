@@ -33,6 +33,7 @@ make test
 
 Run
 ```
+source venv/bin/activate
 flowlog_results.py --file=flowlog.log --s3url=s3://dm-testbucket/results.json
 ```
 
