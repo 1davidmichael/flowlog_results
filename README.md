@@ -1,9 +1,9 @@
-Flowlog Upload
-==============
+Flowlog Results
+===============
 
 This is a simple script to upload an example flowlog to a precreated S3 bucket.
 
-[![CircleCI](https://circleci.com/gh/1davidmichael/flowlog_upload/tree/master.svg?style=svg)](https://circleci.com/gh/1davidmichael/flowlog_upload/tree/master)
+[![CircleCI](https://circleci.com/gh/1davidmichael/flowlog_results/tree/master.svg?style=svg)](https://circleci.com/gh/1davidmichael/flowlog_results/tree/master)
 
 Requirements
 ------------
