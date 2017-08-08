@@ -4,17 +4,13 @@ Usage:
   flowlog_upload.py --file=<file> --s3url=<s3_url>
   flowlog_upload.py -h | --help
 
-
 """
 
 import boto3
 import json
-import os
 import re
-import tempfile
 
 from docopt import docopt
-from moto import mock_s3
 
 
 class flowlog_results(object):
