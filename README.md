@@ -42,3 +42,8 @@ TODO
 * Add error handling
 * [Verify s3 bucket and key](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 * Pre-create S3 bucket if IAM permissions allow and does not exist
+
+Renaming Repo
+-------------
+
+Renaming a repo after setting up CircleCI breaks integration. See [here](https://discuss.circleci.com/t/build-not-triggered-after-github-repo-was-renamed/10774/3) for more details.

@@ -5,11 +5,11 @@ import unittest
 from flowlog_results import flowlog_results
 from moto import mock_s3
 
+example_log = 'example_log/test.log'
+s3_url = 's3://test.example.com/test_key'
+
 
 class TestFlowlogUploadMethods(unittest.TestCase):
-
-    example_log = 'example_log/test.log'
-    s3_url = 's3://test.example.com/test_key'
 
     def test_extract_s3_info(self):
         upload = flowlog_results(example_log, s3_url)
